@@ -19,6 +19,15 @@ bundle
 bundle exec rails g spree_fedex_crossborder:install
 ```
 
+Setup/Configuration
+-------------------
+
+Requires `FEDEX_CROSSBORDER_PARTNER_KEY` environment value to be set.
+
+Requires `config.fedex_crossborder_exchange_rate_url = 'https://partnertools.bongous.com/currency/exchanges.json?key='` setting in config/application.rb .
+
+Requires a scheduled task on server to execute `update_exchange_rates` once a day.
+
 Testing
 -------
 
