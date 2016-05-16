@@ -4,6 +4,8 @@ module SpreeFedexCrossborder
 
       class_option :auto_run_migrations, :type => :boolean, :default => false
 
+      source_root File.expand_path '../../../../..', __FILE__
+
       def add_javascripts
         append_file 'vendor/assets/javascripts/spree/frontend/all.js', "//= require spree/frontend/spree_fedex_crossborder\n"
         append_file 'vendor/assets/javascripts/spree/backend/all.js', "//= require spree/backend/spree_fedex_crossborder\n"
@@ -12,6 +14,10 @@ module SpreeFedexCrossborder
       def add_stylesheets
         inject_into_file 'vendor/assets/stylesheets/spree/frontend/all.css', " *= require spree/frontend/spree_fedex_crossborder\n", :before => /\*\//, :verbose => true
         inject_into_file 'vendor/assets/stylesheets/spree/backend/all.css', " *= require spree/backend/spree_fedex_crossborder\n", :before => /\*\//, :verbose => true
+      end
+
+      def add_icon_files
+        directory 'app/assets/images/flags', 'app/assets/images/flags'
       end
 
       def add_migrations

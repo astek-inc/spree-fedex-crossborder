@@ -1,0 +1,15 @@
+<div id="country-select">
+  <h1>Select Your Country</h1>
+
+  <div class="well">
+    <p>Select your country to see product prices in your currency and the payment and shipping options available for your location.</p>
+  </div>
+
+  <%= @countries.in_groups_of (@countries.count / 2).ceil + 1, false do |group| %>
+    <div class="list-group col-sm-6">
+      <% group.each do |country| %>
+        <%= link_to flag_icon(country.iso) + ' ' + country.name, select_country_path(country.id), { class: country.iso == @current_country ? 'list-group-item active' : 'list-group-item' } %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
