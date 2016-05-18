@@ -110,7 +110,7 @@ class PopulateSpreeCurrencies < ActiveRecord::Migration
       { :country_id => '103', :country_name => 'Israel', :country_iso => 'IL', :name => 'Israeli New Shekel', :code => 'ILS', :symbol => '	₪', :symbol_position => 'before' },
       { :country_id => '110', :country_name => 'Italy', :country_iso => 'IT', :name => 'Euro', :code => 'EUR', :symbol => '€', :symbol_position => 'before' },
       { :country_id => '112', :country_name => 'Jamaica', :country_iso => 'JM', :name => 'Jamaican Dollar', :code => 'JMD', :symbol => 'J$', :symbol_position => 'before' },
-      { :country_id => '114', :country_name => 'Japan', :country_iso => 'JP', :name => 'Japanese Yen', :code => '¥', :symbol => 'JPY', :symbol_position => 'before' },
+      { :country_id => '114', :country_name => 'Japan', :country_iso => 'JP', :name => 'Japanese Yen', :code => 'JPY', :symbol => '¥', :symbol_position => 'before' },
       { :country_id => '111', :country_name => 'Jersey', :country_iso => 'JE', :name => 'Jersey Pound', :code => 'JEP', :symbol => '£', :symbol_position => 'before' },
       { :country_id => '113', :country_name => 'Jordan', :country_iso => 'JO', :name => 'Jordanian Dinar', :code => 'JOD', :symbol => '', :symbol_position => 'before' },
       { :country_id => '125', :country_name => 'Kazakhstan', :country_iso => 'KZ', :name => 'Kazakhstani Tenge', :code => 'KZT', :symbol => '₸', :symbol_position => 'before' },
