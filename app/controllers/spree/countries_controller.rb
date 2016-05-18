@@ -2,8 +2,8 @@ module Spree
   class CountriesController < BaseController
 
     def index
-      session[:return_to] ||= request.referer
-      @countries = Spree::Country.where(:shipping_available => true).order(:name)
+      session[:return_to] = request.referer
+      @countries = Spree::Country.order(:name)
     end
 
     def select

@@ -11,3 +11,11 @@ the installer will append this file to the app vendored assets here: 'vendor/ass
     vertical-align: baseline;
     margin-right: 5px;
 }
+
+#country-select .list-group .list-group-item.unavailable {
+    text-decoration: line-through;
+}
+
+#country-select .well span.unavailable {
+    text-decoration: line-through;
+}
