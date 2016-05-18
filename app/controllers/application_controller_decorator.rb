@@ -12,6 +12,9 @@ ApplicationController.class_eval do
       iso = country_iso_from_ip
       set_country_cookie iso
       set_currency_cookie iso
+    elsif cookies.permanent[:currency].blank?
+      iso = cookies.permanent[:country]
+      set_currency_cookie iso
     end
   end
 
