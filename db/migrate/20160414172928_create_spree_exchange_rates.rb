@@ -5,5 +5,7 @@ class CreateSpreeExchangeRates < ActiveRecord::Migration
       t.float :value
       t.timestamps null: false
     end
+
+    Spree::ExchangeRate.fetch_updates
   end
 end
