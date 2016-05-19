@@ -1,0 +1,21 @@
+<div class="row">
+  <%= f.field_container :name, class: %w[form-group col-md-8] do %>
+      <%= f.label :name, Spree.t(:name) %> <span class="required">*</span>
+      <%= f.text_field :name, :required => true, :class => 'form-control' %>
+  <% end %>
+
+  <%= f.field_container :code, class: %w[form-group col-md-8] do %>
+      <%= f.label :code, Spree.t(:code) %> <span class="required">*</span>
+      <%= f.text_field :code, :required => true, :class => 'form-control' %>
+  <% end %>
+
+  <%= f.field_container :symbol, class: %w[form-group col-md-8] do %>
+      <%= f.label :symbol, Spree.t(:symbol) %> <span class="required">*</span>
+      <%= f.text_field :symbol, :required => true, :class => 'form-control' %>
+  <% end %>
+
+  <%= f.field_container :symbol_position, :class => %w[form-group col-md-8] do %>
+      <%= f.label :symbol_position, t(:symbol_position)%> <span class="required">*</span>
+      <%= f.select :symbol_position, [['Before', 'before'], ['After', 'after']], {}, { :required => true, :class => 'form-control' } %>
+  <% end %>
+</div>

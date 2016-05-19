@@ -1,0 +1,15 @@
+<% content_for :page_title do %>
+    <%= Spree.t(:editing) + ' ' + Spree.t(:currency, scope: :fedex_crossborder) %>
+<% end %>
+
+<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @currency } %>
+
+<%= form_for( [:admin, @currency] )do |f| %>
+    <fieldset data-hook="edit_currency">
+      <%= render partial: 'form', locals: { f: f } %>
+    </fieldset>
+
+    <div class="form-actions">
+      <%= render partial: 'spree/admin/shared/edit_resource_links' %>
+    </div>
+<% end %>
