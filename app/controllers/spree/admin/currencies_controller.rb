@@ -16,7 +16,7 @@ module Spree
       def collection
         return @collection if @collection.present?
         params[:q] ||= {}
-        params[:q][:deleted_at_null] ||= "1"
+        params[:q][:deleted_at_null] ||= '1'
 
         params[:q][:s] ||= 'name asc'
         @collection = super
@@ -28,7 +28,8 @@ module Spree
         # @search needs to be defined as this is passed to search_form_for
         # Temporarily remove params[:q][:deleted_at_null] from params[:q] to ransack products.
         # This is to include all products and not just deleted products.
-        @search = @collection.ransack(params[:q].reject { |k, _v| k.to_s == 'deleted_at_null' })
+        @search = @collection.ransack(params[:q])
+                      # .reject { |k, _v| k.to_s == 'deleted_at_null' })
         @collection = @search.result.
             # distinct_by_custom_project_ids(params[:q][:s]).
             # includes(custom_project_includes).
