@@ -1,16 +1,19 @@
 class UpdateSpreeCountriesShippingAvailable < ActiveRecord::Migration
   def up
-    supported_countries = ['AS', 'AD', 'AO', 'AI', 'AQ', 'AG', 'AR', 'AM', 'AW', 'AU', 'AT', 'AZ', 'BS', 'BH', 'BD', 'BB', 'BY', 'BE', 'BZ', 'BJ', 'BM',
-     'BT', 'BO', 'BQ', 'BA', 'BW', 'BV', 'BR', 'IO', 'BN', 'BG', 'BF', 'BI', 'KH', 'CM', 'CA', 'CV', 'KY', 'TD', 'CL', 'CN', 'CX',
-     'CC', 'CO', 'CG', 'CK', 'CR', 'SX', 'HR', 'CW', 'CY', 'CZ', 'TL', 'DK', 'DJ', 'DM', 'DO', 'EC', 'EG', 'SV', 'ER', 'EE', 'ET',
-     'FO', 'FJ', 'FI', 'FR', 'GF', 'PF', 'TF', 'GA', 'GM', 'GE', 'DE', 'GH', 'GI', 'GR', 'GL', 'GD', 'GP', 'GU', 'GT', 'GN', 'GY',
-     'HT', 'HM', 'HN', 'HK', 'HU', 'IS', 'IN', 'ID', 'IQ', 'IE', 'IM', 'IL', 'IT', 'CI', 'JM', 'JP', 'JO', 'KZ', 'KE', 'KR', 'KW',
-     'KG', 'LA', 'LV', 'LB', 'LS', 'LR', 'LY', 'LI', 'LT', 'LU', 'MO', 'MK', 'MG', 'MW', 'MY', 'MV', 'ML', 'MT', 'MH', 'MQ', 'MR',
-     'MU', 'MX', 'FM', 'MD', 'MC', 'MN', 'ME', 'MS', 'MA', 'MZ', 'ZZ', 'NA', 'NP', 'NL', 'NC', 'NZ', 'NI', 'NE', 'NG', 'NF', 'MP',
-     'NO', 'OM', 'PK', 'PW', 'PS', 'PA', 'PG', 'PY', 'PE', 'PH', 'PN', 'PL', 'PT', 'PR', 'QA', 'SS', 'RE', 'RO', 'RW', 'GS', 'SH',
-     'WS', 'SM', 'SA', 'SN', 'RS', 'SC', 'SG', 'SK', 'SI', 'ZA', 'ES', 'LK', 'BL', 'XB', 'KN', 'LC', 'MF', 'MM', 'PM', 'VC', 'SR',
-     'SJ', 'SZ', 'SE', 'CH', 'TW', 'TZ', 'TH', 'TG', 'TK', 'TO', 'TT', 'TN', 'TR', 'TC', 'UG', 'AE', 'GB', 'US', 'UY', 'UZ', 'VU',
-     'VA', 'VE', 'VN', 'VG', 'VI', 'WF', 'EH', 'WS', 'YE', 'ZM', 'ZW',
+    supported_countries = [
+        'AS', 'AO', 'AI', 'AM', 'AW', 'AZ', '1F', 'BS', '1A', 'BY', 'BJ', 'BT', 'BO', 'X1', 'BW', 'BG',
+        'BF', 'CM', 'CV', 'KY', 'TD', 'CG', 'CK', 'HR', 'CW', 'DJ', 'EG', 'ER', 'ET', 'FO', 'FJ', 'GF',
+        'PF', 'GA', 'GM', 'GE', 'GH', 'GI', 'GR', 'GL', 'GU', 'GN', 'GY', 'HT', 'IS', 'CI', 'KZ', 'KG',
+        'LA', 'LB', 'LS', 'LR', 'LT', 'MK', 'MG', '1G', 'MW', 'ML', 'MH', 'MR', 'MU', 'FM', 'MD', 'MN',
+        'ME', 'MA', 'MZ', 'NC', 'NE', 'PW', 'PG', 'PT', 'RE', 'X8', 'SN', 'RS', 'SC', 'SI', 'BL', '1L',
+        'XB', 'MF', '1K', 'VC', 'SR', 'SZ', 'TO', 'TN', 'UY', 'UZ', 'VU', 'VG', 'VI', 'WS', 'ZM', 'ZW',
+        'AG', 'AR', 'AU', 'AT', 'BH', 'BD', 'BB', 'BE', 'BZ', 'BM', 'BA', 'BR', 'BN', 'BI', 'KH', 'CA',
+        'CL', 'CN', 'CO', 'CR', 'CY', 'CZ', 'DK', 'DM', 'DO', 'EC', 'SV', 'EE', 'FI', 'FR', 'DE', 'GD',
+        'GP', 'GT', 'HN', 'HK', 'HU', 'IN', 'ID', 'IE', 'IL', 'IT', 'JM', 'JP', 'JO', 'KE', 'KR', 'KW',
+        'LV', 'LI', 'LU', 'MO', 'MY', 'MV', 'MT', 'MQ', 'MX', 'MC', 'MS', 'NA', 'NP', 'NL', 'NZ', 'NI',
+        'NG', 'NO', 'OM', 'PK', 'PA', 'PY', 'PE', 'PH', 'PL', 'PR', 'QA', 'RO', 'RW', 'SA', '1C', 'SG',
+        'SK', 'ZA', 'ES', 'LK', '1J', 'KN', 'LC', 'SE', 'CH', 'TW', 'TZ', 'TH', 'TG', 'TT', 'TR', 'TC',
+        'UG', 'AE', 'GB', 'US', 'VE', 'VN', '1B'
     ]
 
     Spree::Country.update_all(shipping_available: false)
