@@ -14,4 +14,16 @@ Spree::BaseHelper.class_eval do
   def convert_price(price, currency_code)
     Spree::ExchangeRate.convert(price, currency_code)
   end
+
+  def price_for_js_calculation(product_or_variant)
+    price_in_usd = product_or_variant.price_in('USD').amount
+    unless current_currency == Spree::Config[:currency]
+      exchange_rate = Spree::ExchangeRate.find_by(code: current_currency).value
+      Money.add_rate('USD', current_currency, exchange_rate)
+      money = Money.us_dollar(price_in_usd * 100).exchange_to(current_currency)
+      money.format(:symbol => false)
+    else
+      price_in_usd
+    end
+  end
 end

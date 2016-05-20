@@ -6,7 +6,6 @@ module Spree
     require 'open-uri'
     require 'json'
 
-
     def self.fetch_updates
       url = Rails.configuration.fedex_crossborder_exchange_rate_url + ENV['FEDEX_CROSSBORDER_PARTNER_KEY']
       response = open(url).read
