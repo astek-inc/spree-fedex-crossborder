@@ -15,7 +15,7 @@
   <% end %>
 
   <%= f.field_container :symbol_position, :class => %w[form-group col-md-8] do %>
-      <%= f.label :symbol_position, t(:symbol_position)%> <span class="required">*</span>
-      <%= f.select :symbol_position, [['Before', 'before'], ['After', 'after']], {}, { :required => true, :class => 'form-control' } %>
+      <%= f.label :symbol_position, Spree.t(:symbol_position, scope: :fedex_crossborder) %> <span class="required">*</span>
+      <%= f.select :symbol_position, [[Spree.t(:before, scope: :fedex_crossborder), 'before'], [Spree.t(:after, scope: :fedex_crossborder), 'after']], {}, { :required => true, :class => 'form-control' } %>
   <% end %>
 </div>

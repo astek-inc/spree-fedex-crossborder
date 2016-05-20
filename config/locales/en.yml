@@ -8,3 +8,5 @@ en:
       shipping_available: 'Shipping Available'
       symbol: 'Symbol'
       symbol_position: 'Symbol Position'
+      before: 'Before'
+      after: 'After'

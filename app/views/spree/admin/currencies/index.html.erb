@@ -25,7 +25,7 @@
             <td class="name"><%= currency.name %></td>
             <td class="code"><%= currency.code %></td>
             <td class="symbol"><%= currency.symbol %></td>
-            <td class="symbol-position"><%= currency.symbol_position %></td>
+            <td class="symbol-position"><%= Spree.t(currency.symbol_position, scope: :fedex_crossborder) %></td>
             <td class="actions actions-2 text-right">
               <%= link_to_edit(currency, :no_text => true) %>
               <%= link_to_delete(currency, :no_text => true) %>
