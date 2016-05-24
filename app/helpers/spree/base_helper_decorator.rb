@@ -1,4 +1,7 @@
 Spree::BaseHelper.class_eval do
+
+  require 'money'
+
   def flag_icon country_iso
     image_tag(asset_path('flags/'+country_iso.downcase+'.png'), class: 'flag-icon')
   end
@@ -15,6 +18,18 @@ Spree::BaseHelper.class_eval do
     Spree::ExchangeRate.convert(price, currency_code)
   end
 
+  def convert_display_price(price_in_default_currency)
+    unless current_currency == Spree::Config[:currency]
+      exchange_rate = Spree::ExchangeRate.find_by(code: current_currency).value
+      Money.add_rate('USD', current_currency, exchange_rate)
+      money = Money.us_dollar(price_in_default_currency * 100).exchange_to(current_currency)
+      money.format
+    else
+      money = Money.new(price_in_default_currency * 100)
+      money.format
+    end
+  end
+
   def price_for_js_calculation(product_or_variant)
     price_in_usd = product_or_variant.price_in('USD').amount
     unless current_currency == Spree::Config[:currency]
@@ -26,4 +41,5 @@ Spree::BaseHelper.class_eval do
       price_in_usd
     end
   end
+
 end
