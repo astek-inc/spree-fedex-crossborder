@@ -1,10 +1,5 @@
 ApplicationController.class_eval do
 
-  require 'json'
-  require 'open-uri'
-
-  GEOLOCATION_URL = 'http://ip-api.com/json/'
-
   before_action :set_location_cookies
 
   def set_location_cookies
@@ -19,11 +14,15 @@ ApplicationController.class_eval do
   end
 
   def country_iso_from_ip
-    response = open(GEOLOCATION_URL+request.remote_ip).read
-    location_data = JSON.parse(response)
 
-    unless location_data['countryCode'].nil?
-      return location_data['countryCode']
+    response = Geoip2.country('164.124.255.255') #('me')
+
+    # response = Geoip2.country(request.remote_ip)
+    location_data = response.to_hash
+    country = location_data['country']
+
+    unless country['iso_code'].nil?
+      return country['iso_code']
     else
       return Rails.configuration.default_country_iso
     end

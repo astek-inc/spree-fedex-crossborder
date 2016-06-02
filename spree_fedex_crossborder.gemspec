@@ -17,7 +17,9 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   s.add_dependency 'spree_core', '~> 3.0.4'
-  # s.add_dependency 'geocoder'
+
+  # MaxMind geolocation
+  s.add_dependency 'geoip2'
 
   s.add_development_dependency 'capybara', '~> 2.4'
   s.add_development_dependency 'coffee-rails'
