@@ -1,4 +1,5 @@
 Deface::Override.new(
+    :original => 'b4dc8bc62109850f9e1c0f1f315ccb5afbca70e4',
     :virtual_path => 'spree/checkout/edit',
     :name => 'replace_checkout_form_wrapper',
     :replace_contents => '[data-hook="checkout_form_wrapper"]',
