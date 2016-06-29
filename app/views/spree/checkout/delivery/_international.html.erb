@@ -1,92 +1,96 @@
 <%= form_tag ENV["FEDEX_CROSSBORDER_CHECKOUT_PARTNER_URL"], authenticity_token: false, enforce_utf8: false do %>
 
-<%#= debug @fedex_crossborder_token %>
+  <%= hidden_field_tag 'PARTNER_KEY', ENV['FEDEX_CROSSBORDER_PARTNER_KEY'], { :id => nil } %>
+  <%= hidden_field_tag 'TOKEN', @fedex_crossborder_token, { :id => nil } %>
+  <%= hidden_field_tag 'TOTAL_DOMESTIC_SHIPPING_CHARGE', 0, { :id => nil } %>
 
-<%= hidden_field_tag 'PARTNER_KEY', ENV['FEDEX_CROSSBORDER_PARTNER_KEY'] %>
-<%= hidden_field_tag 'TOKEN', '123456ABCDEF' %>
+  <%= hidden_field_tag 'CUSTOM_ORDER_1', @order.number, { :id => nil } %>
+  <% [*2..3].each do |i| %>
+    <%= hidden_field_tag 'CUSTOM_ORDER_'+i.to_s, '', { :id => nil } %>
+  <% end %>
 
-<% @order_items.each.with_index(1) do |item, i| %>
-    <%= hidden_field_tag 'PRODUCT_ID_'+i.to_s, item.variant.sku %>
-    <%= hidden_field_tag 'PRODUCT_NAME_'+i.to_s, item.variant.product.name %>
-    <%= hidden_field_tag 'PRODUCT_PRICE_'+i.to_s, item.variant.price %>
-    <%= hidden_field_tag 'PRODUCT_Q_'+i.to_s, item.quantity %>
-<% end %>
+  <% @order_items.each.with_index(1) do |item, i| %>
+      <%= hidden_field_tag 'PRODUCT_ID_'+i.to_s, item.variant.sku, { :id => nil } %>
+      <%= hidden_field_tag 'PRODUCT_NAME_'+i.to_s, item.variant.product.name, { :id => nil } %>
+      <%= hidden_field_tag 'PRODUCT_PRICE_'+i.to_s, item.variant.price, { :id => nil } %>
+      <%= hidden_field_tag 'PRODUCT_Q_'+i.to_s, item.quantity, { :id => nil } %>
+      <%= hidden_field_tag 'PRODUCT_SHIPPING_'+i.to_s, 0.to_f, { :id => nil } %>
+  <% end %>
 
-<%= hidden_field_tag 'ORDER_CURRENCY', 'USD' %>
-<%= hidden_field_tag 'CUST_FIRST_NAME', @order.bill_address.firstname %>
-<%= hidden_field_tag 'CUST_LAST_NAME', @order.bill_address.lastname %>
-<%= hidden_field_tag 'CUST_COMPANY', @order.bill_address.company %>
-<%= hidden_field_tag 'CUST_ADDRESS_LINE_1', @order.bill_address.address1 %>
-<%= hidden_field_tag 'CUST_ADDRESS_LINE_2', @order.bill_address.address2 %>
-<%= hidden_field_tag 'CUST_CITY', @order.bill_address.city %>
-<%= hidden_field_tag 'CUST_STATE', @order.bill_address.state.name %>
-<%= hidden_field_tag 'CUST_COUNTRY', @order.bill_address.country.name %>
-<%= hidden_field_tag 'CUST_ZIP', @order.bill_address.zipcode %>
-<%= hidden_field_tag 'CUST_PHONE', @order.bill_address.phone %>
-<%= hidden_field_tag 'CUST_EMAIL', @order.user.email %>
-<%= hidden_field_tag 'SHIP_FIRST_NAME', @order.ship_address.firstname %>
-<%= hidden_field_tag 'SHIP_LAST_NAME', @order.ship_address.lastname %>
-<%= hidden_field_tag 'SHIP_COMPANY', @order.ship_address.company %>
-<%= hidden_field_tag 'SHIP_ADDRESS_LINE_1', @order.ship_address.address1 %>
-<%= hidden_field_tag 'SHIP_ADDRESS_LINE_2', @order.ship_address.address2 %>
-<%= hidden_field_tag 'SHIP_CITY', @order.ship_address.city %>
-<%= hidden_field_tag 'SHIP_STATE', @order.ship_address.state.name %>
-<%= hidden_field_tag 'SHIP_COUNTRY', @order.ship_address.country.name %>
-<%= hidden_field_tag 'SHIP_ZIP', @order.ship_address.zipcode %>
-<%= hidden_field_tag 'SHIP_PHONE', @order.ship_address.phone %>
-<%= hidden_field_tag 'SHIP_EMAIL', @order.user.email %>
-<%= hidden_field_tag 'SUB', 'SUBMIT ORDER' %>
+  <%= hidden_field_tag 'ORDER_CURRENCY', 'USD', { :id => nil } %>
+  <%= hidden_field_tag 'CUST_FIRST_NAME', @order.bill_address.firstname, { :id => nil } %>
+  <%= hidden_field_tag 'CUST_LAST_NAME', @order.bill_address.lastname, { :id => nil } %>
+  <%= hidden_field_tag 'CUST_COMPANY', @order.bill_address.company, { :id => nil } %>
+  <%= hidden_field_tag 'CUST_ADDRESS_LINE_1', @order.bill_address.address1, { :id => nil } %>
+  <%= hidden_field_tag 'CUST_ADDRESS_LINE_2', @order.bill_address.address2, { :id => nil } %>
+  <%= hidden_field_tag 'CUST_CITY', @order.bill_address.city, { :id => nil } %>
+  <%= hidden_field_tag 'CUST_STATE', @order.bill_address.state.name, { :id => nil } %>
+  <%= hidden_field_tag 'CUST_COUNTRY', @order.bill_address.country.name, { :id => nil } %>
+  <%= hidden_field_tag 'CUST_ZIP', @order.bill_address.zipcode, { :id => nil } %>
+  <%= hidden_field_tag 'CUST_PHONE', @order.bill_address.phone, { :id => nil } %>
+  <%= hidden_field_tag 'CUST_EMAIL', @order.user.email, { :id => nil } %>
+  <%= hidden_field_tag 'SHIP_FIRST_NAME', @order.ship_address.firstname, { :id => nil } %>
+  <%= hidden_field_tag 'SHIP_LAST_NAME', @order.ship_address.lastname, { :id => nil } %>
+  <%= hidden_field_tag 'SHIP_COMPANY', @order.ship_address.company, { :id => nil } %>
+  <%= hidden_field_tag 'SHIP_ADDRESS_LINE_1', @order.ship_address.address1, { :id => nil } %>
+  <%= hidden_field_tag 'SHIP_ADDRESS_LINE_2', @order.ship_address.address2, { :id => nil } %>
+  <%= hidden_field_tag 'SHIP_CITY', @order.ship_address.city, { :id => nil } %>
+  <%= hidden_field_tag 'SHIP_STATE', @order.ship_address.state.name, { :id => nil } %>
+  <%= hidden_field_tag 'SHIP_COUNTRY', @order.ship_address.country.name, { :id => nil } %>
+  <%= hidden_field_tag 'SHIP_ZIP', @order.ship_address.zipcode, { :id => nil } %>
+  <%= hidden_field_tag 'SHIP_PHONE', @order.ship_address.phone, { :id => nil } %>
+  <%= hidden_field_tag 'SHIP_EMAIL', @order.user.email, { :id => nil } %>
+  <%= hidden_field_tag 'SUB', 'SUBMIT ORDER', { :id => nil } %>
 
-<div class="panel panel-default" id='shipping_method' data-hook>
-  <div class="panel-heading">
-    <h3 class="panel-title"><%= Spree.t(:delivery) %></h3>
-  </div>
-  <div class="panel-body" data-hook="shipping_method_inner">
-    <div id="methods">
+  <div class="panel panel-default" id='shipping_method' data-hook>
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= Spree.t(:delivery) %></h3>
+    </div>
+    <div class="panel-body" data-hook="shipping_method_inner">
+      <div id="methods">
 
-      <div class="shipment">
-        <div class="alert alert-success" role="alert">
-          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Because you have provided a delivery
-          address outside the United States, you will be routed to FedEx Crossborder, our international payment and shipping
-          partner. You will be provided a full landed cost in the next step.
+        <div class="shipment">
+          <div class="alert alert-success" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Because you have provided a delivery
+            address outside the United States, you will be routed to FedEx Crossborder, our international payment and shipping
+            partner. You will be provided a full landed cost in the next step.
+          </div>
+
+          <table class="table stock-contents" data-hook="stock-contents">
+            <colgroup>
+              <col style="width: 10%;" />
+              <col style="width: 60%;" />
+              <col style="width: 10%;" />
+              <col style="width: 20%;" />
+            </colgroup>
+            <thead>
+            <tr class="active">
+              <th></th>
+              <th align='left'><%= Spree.t(:item) %></th>
+              <th><%= Spree.t(:qty) %></th>
+              <th><%= Spree.t(:price) %></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @order_items.each do |item| %>
+                <tr class="stock-item">
+                  <td class="item-image"><%= mini_image(item.variant) %></td>
+                  <td class="item-name"><%= item.variant.name %></td>
+                  <td class="item-qty"><%= item.quantity %></td>
+                  <td class="item-price"><%= display_price(item.variant) %></td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
         </div>
 
-        <table class="table stock-contents" data-hook="stock-contents">
-          <colgroup>
-            <col style="width: 10%;" />
-            <col style="width: 60%;" />
-            <col style="width: 10%;" />
-            <col style="width: 20%;" />
-          </colgroup>
-          <thead>
-          <tr class="active">
-            <th></th>
-            <th align='left'><%= Spree.t(:item) %></th>
-            <th><%= Spree.t(:qty) %></th>
-            <th><%= Spree.t(:price) %></th>
-          </tr>
-          </thead>
-          <tbody>
-          <% @order_items.each do |item| %>
-              <tr class="stock-item">
-                <td class="item-image"><%= mini_image(item.variant) %></td>
-                <td class="item-name"><%= item.variant.name %></td>
-                <td class="item-qty"><%= item.quantity %></td>
-                <td class="item-price"><%= display_price(item.variant) %></td>
-              </tr>
-          <% end %>
-          </tbody>
-        </table>
       </div>
-
     </div>
   </div>
-</div>
 
-<br />
+  <br />
 
-<div class="well text-right form-buttons" data-hook="buttons">
-  <%= submit_tag Spree.t(:save_and_continue), :class => 'btn btn-lg btn-success' %>
-</div>
-
+  <div class="well text-right form-buttons" data-hook="buttons">
+    <%= submit_tag Spree.t(:save_and_continue), :class => 'btn btn-lg btn-success' %>
+  </div>
 <% end %>

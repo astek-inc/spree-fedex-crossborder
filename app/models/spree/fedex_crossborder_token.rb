@@ -1,9 +1,10 @@
 module Spree
-  class FedexCrossborder #< Spree::Base
+  class FedexCrossborderToken < Spree::Base
+
+    require 'net/http'
+    require 'json'
 
     def self.get_token
-      require 'net/http'
-      # require 'uri'
 
       uri = URI.parse(ENV['FEDEX_CROSSBORDER_CHECKOUT_SECURITY_URL'])
       http = Net::HTTP.new(uri.host, uri.port)
@@ -16,11 +17,13 @@ module Spree
 
       response = http.request(request)
 
-      response
-      #
-      # # response.body
-      # # response.status
-      # # response["header-here"] # All headers are lowercase
+      if response.code == '200'
+        response_body = JSON.parse response.body
+        if response_body['error'] == 0
+          response_body['token']
+        end
+      end
+
     end
   end
 end
