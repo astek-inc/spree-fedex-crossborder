@@ -23,7 +23,8 @@ the installer will append this file to the app vendored assets here: 'vendor/ass
 
 .label-fedex-vended[href]:hover, .label-fedex-vended[href]:focus,
 .label-fedex-inventory[href]:hover, .label-fedex-inventory[href]:focus,
-.label-fedex-processing[href]:hover, .label-fedex-processing[href]:focus {
+.label-fedex-processing[href]:hover, .label-fedex-processing[href]:focus,
+.label-fedex-shipped[href]:hover, .label-fedex-shipped[href]:focus {
     background-color: #179bf5;
 }
 
@@ -35,10 +36,11 @@ the installer will append this file to the app vendored assets here: 'vendor/ass
     background-color: #649335;
 }
 
-.label-fedex-cancelled {
+.label-fedex-cancelled, .label-fedex-blacklist {
     background-color: #F55753;
 }
 
-.label-fedex-cancelled[href]:hover, .label-fedex-cancelled[href]:focus {
+.label-fedex-cancelled[href]:hover, .label-fedex-cancelled[href]:focus,
+.label-fedex-blacklist[href]:hover, .label-fedex-blacklist[href]:focus {
     background-color: #f22823;
 }
