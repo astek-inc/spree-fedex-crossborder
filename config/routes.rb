@@ -20,7 +20,7 @@ Spree::Core::Engine.routes.draw do
     namespace :v1 do
       resources :fedex_crossborder_order_confirmations, only: [:create]
     end
-    post 'fedex_crossborder_order_confirmations', to: 'v1/fedex_crossborder_order_confirmations#create', defaults: { format: 'xml' }
+    post 'fedex_crossborder_order_confirmations', to: 'v1/fedex_crossborder_order_confirmations#create' , defaults: { format: 'text' }
   end
 
 end

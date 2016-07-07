@@ -2,3 +2,43 @@
 Placeholder manifest file.
 the installer will append this file to the app vendored assets here: 'vendor/assets/stylesheets/spree/backend/all.css'
 */
+
+.label-fedex-new,
+.label-fedex-pending,
+.label-fedex-customer_inquiry {
+    background-color: #F8D053;
+}
+
+.label-fedex-new[href]:hover, .label-fedex-new[href]:focus,
+.label-fedex-pending[href]:hover, .label-fedex-pending[href]:focus,
+.label-fedex-customer_inquiry[href]:hover, .label-fedex-customer_inquiry[href]:focus {
+    background-color: #f6c322;
+}
+
+.label-fedex-vended,
+.label-fedex-inventory,
+.label-fedex-processing {
+    background-color: #48B0F7;
+}
+
+.label-fedex-vended[href]:hover, .label-fedex-vended[href]:focus,
+.label-fedex-inventory[href]:hover, .label-fedex-inventory[href]:focus,
+.label-fedex-processing[href]:hover, .label-fedex-processing[href]:focus {
+    background-color: #179bf5;
+}
+
+.label-fedex-delivered {
+    background-color: #7DB942;
+}
+
+.label-fedex-delivered[href]:hover, .label-fedex-delivered[href]:focus {
+    background-color: #649335;
+}
+
+.label-fedex-cancelled {
+    background-color: #F55753;
+}
+
+.label-fedex-cancelled[href]:hover, .label-fedex-cancelled[href]:focus {
+    background-color: #f22823;
+}

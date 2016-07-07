@@ -16,8 +16,8 @@ module Spree
       form_data = {
         'PARTNER_KEY' => ENV['FEDEX_CROSSBORDER_PARTNER_KEY'],
         'TOTAL_DOMESTIC_SHIPPING_CHARGE' => 0,
-        'CUSTOM_ORDER_1' => order.number,
-        'CUSTOM_ORDER_2' => order.id,
+        'CUSTOM_ORDER_1' => order.id,
+        'CUSTOM_ORDER_2' => order.number,
         'ORDER_CURRENCY' => 'USD',
         'CUST_FIRST_NAME' => order.bill_address.firstname,
         'CUST_LAST_NAME' => order.bill_address.lastname,
@@ -49,6 +49,7 @@ module Spree
         form_data["PRODUCT_PRICE_#{i}"] = item.variant.price
         form_data["PRODUCT_Q_#{i}"] = item.quantity
         form_data["PRODUCT_SHIPPING_#{i}"] = 0.to_f
+        form_data["PRODUCT_CUSTOM_1_#{i}"] = item.variant.id
       end
 
       request.set_form_data(form_data)
