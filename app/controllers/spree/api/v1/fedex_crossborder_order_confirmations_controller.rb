@@ -7,7 +7,7 @@ module Spree
         require 'nokogiri'
 
         def create
-          unless partner_key
+          unless valid_partner_key?
             raise "Invalid partner key: #{params[:partner_key]}"
           end
 
@@ -16,14 +16,23 @@ module Spree
           end
           @xml_doc = xml_doc
 
+          unless @status = status
+            raise "Invalid status: #{params[:status]}"
+          end
+
           confirmation = {
               :order_id => order_id,
               :order_number => order_number,
-              :status => status,
+              :status => @status,
               :data => @xml
           }
 
           Spree::FedexCrossborderOrderConfirmation.create confirmation
+
+          # Products have been cancelled, i.e., removed from the order
+          if @status == 'C'
+            update_line_items
+          end
 
           respond_to do |format|
             format.text { render text: '{SUCCESS}' }
@@ -31,15 +40,15 @@ module Spree
 
         end
 
-        def partner_key
+        private
+
+        def valid_partner_key?
           params[:partner_key] == ENV['FEDEX_CROSSBORDER_PARTNER_KEY']
         end
 
         def status
           if Spree::FedexCrossborderOrderConfirmation::STATUSES.has_value?(params[:status])
             params[:status]
-          else
-            raise "Invalid status: #{params[:status]}"
           end
         end
 
@@ -66,8 +75,24 @@ module Spree
         def order_number
           begin
             @xml_doc.at_xpath('//custom_order2').content.strip
-          rescue
+          rescue => e
             raise "Error extracting order_number from XML: #{@xml}. #{e}"
+          end
+        end
+
+        # If products have been cancelled from the FedEx order, remove their corresponding line items
+        def update_line_items
+          begin
+            variant_ids = @xml_doc.xpath('//custom_1').map { |node| node.content.strip }
+          rescue => e
+            raise "Error extracting variant_ids from XML: #{@xml}. #{e}"
+          end
+
+          order = Spree::Order.find(order_id)
+          order.line_items.each do |line_item|
+            unless variant_ids.include? line_item.variant_id
+              order.line_items.delete(line_item.id)
+            end
           end
         end
 

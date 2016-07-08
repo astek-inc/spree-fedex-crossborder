@@ -3,8 +3,8 @@ module Spree
 
     belongs_to :order
 
-    attr_accessor :pretty_status
-    attr_accessor :status_text
+    attr_reader :pretty_status
+    attr_reader :status_text
 
     STATUSES = {
       new: 'N', # Sent when an order is considered new in the Bongo System.
