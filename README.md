@@ -22,7 +22,18 @@ bundle exec rails g spree_fedex_crossborder:install
 Setup/Configuration
 -------------------
 
-Requires `FEDEX_CROSSBORDER_PARTNER_KEY` environment value to be set.
+Requires the following environment values to be set:
+
+```
+FEDEX_CROSSBORDER_CHECKOUT_SECURITY_URL
+FEDEX_CROSSBORDER_CHECKOUT_PARTNER_URL
+FEDEX_CROSSBORDER_USERNAME
+FEDEX_CROSSBORDER_PASSWORD
+FEDEX_CROSSBORDER_PARTNER_KEY
+
+MAXMIND_USER_ID
+MAXMIND_LICENSE_KEY
+```
 
 Requires `config.fedex_crossborder_exchange_rate_url = 'https://partnertools.bongous.com/currency/exchanges.json?key='` setting in config/application.rb .
 
