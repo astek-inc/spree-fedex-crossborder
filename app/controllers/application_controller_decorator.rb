@@ -14,10 +14,7 @@ ApplicationController.class_eval do
   end
 
   def country_iso_from_ip
-
-    response = Geoip2.country('164.124.255.255') #('me')
-
-    # response = Geoip2.country(request.remote_ip)
+    response = Geoip2.country(request.remote_ip)
     location_data = response.to_hash
     country = location_data['country']
 
