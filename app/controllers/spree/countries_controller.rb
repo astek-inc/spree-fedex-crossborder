@@ -1,5 +1,5 @@
 module Spree
-  class CountriesController < BaseController
+  class CountriesController < Spree::StoreController
 
     def index
       session[:return_to] = request.referer
