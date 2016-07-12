@@ -18,7 +18,7 @@ ApplicationController.class_eval do
     location_data = response.to_hash
     country = location_data['country']
 
-    unless country['iso_code'].nil?
+    unless country.nil? || country['iso_code'].nil?
       return country['iso_code']
     else
       return Rails.configuration.default_country_iso
