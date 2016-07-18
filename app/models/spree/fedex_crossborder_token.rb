@@ -28,7 +28,7 @@ module Spree
         'CUST_COUNTRY' => order.bill_address.country.iso,
         'CUST_ZIP' => order.bill_address.zipcode,
         'CUST_PHONE' => order.bill_address.phone,
-        'CUST_EMAIL' => order.user.email,
+        'CUST_EMAIL' => order.email,
         'SHIP_FIRST_NAME' => order.ship_address.firstname,
         'SHIP_LAST_NAME' => order.ship_address.lastname,
         'SHIP_COMPANY' => order.ship_address.company,
@@ -39,7 +39,7 @@ module Spree
         'SHIP_COUNTRY' => order.ship_address.country.iso,
         'SHIP_ZIP' => order.ship_address.zipcode,
         'SHIP_PHONE' => order.ship_address.phone,
-        'SHIP_EMAIL' => order.user.email
+        'SHIP_EMAIL' => order.email
       }
 
       items.each.with_index(1) do |item, i|
