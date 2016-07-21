@@ -45,6 +45,23 @@ module Spree
 
         private
 
+        # FedEx Crossborder sends a "token" param which is unrelated to Spree.
+        # We need to ignore it. This overwrites the method found in the API base controller,
+        # which for some reason attempts to validate a "token" param as an API key
+        # even if authentication is not required.
+        def authenticate_user
+          return if @current_api_user
+
+          if requires_authentication? && api_key.blank? && order_token.blank?
+            render "spree/api/errors/must_specify_api_key", status: 401 and return
+          elsif order_token.blank? && requires_authentication? # (requires_authentication? || api_key.present?)
+            render "spree/api/errors/invalid_api_key", status: 401 and return
+          else
+            # An anonymous user
+            @current_api_user = Spree.user_class.new
+          end
+        end
+
         def valid_partner_key?
           params[:partner_key] == ENV['FEDEX_CROSSBORDER_PARTNER_KEY']
         end
