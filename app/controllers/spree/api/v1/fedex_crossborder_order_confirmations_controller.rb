@@ -8,15 +8,18 @@ module Spree
 
         def create
           unless valid_partner_key?
+            puts "Invalid partner key: #{params[:partner_key]}"
             raise "Invalid partner key: #{params[:partner_key]}"
           end
 
           unless @xml = Base64.strict_decode64(params[:order])
+            puts "Invalid XML: #{params[:order]}"
             raise "Invalid XML: #{params[:order]}"
           end
           @xml_doc = xml_doc
 
           unless @status = status
+            puts "Invalid status: #{params[:status]}"
             raise "Invalid status: #{params[:status]}"
           end
 
@@ -58,6 +61,7 @@ module Spree
               config.strict.nonet
             end
           rescue => e
+            puts "Cannot parse XML: #{@xml}. #{e}"
             raise "Cannot parse XML: #{@xml}. #{e}"
           end
         end
@@ -67,6 +71,7 @@ module Spree
           begin
             @xml_doc.at_xpath('//custom_order1').content.strip
           rescue => e
+            puts "Error extracting order_id from XML: #{@xml}. #{e}"
             raise "Error extracting order_id from XML: #{@xml}. #{e}"
           end
         end
@@ -76,6 +81,7 @@ module Spree
           begin
             @xml_doc.at_xpath('//custom_order2').content.strip
           rescue => e
+            puts "Error extracting order_number from XML: #{@xml}. #{e}"
             raise "Error extracting order_number from XML: #{@xml}. #{e}"
           end
         end
@@ -85,6 +91,7 @@ module Spree
           begin
             variant_ids = @xml_doc.xpath('//custom_1').map { |node| node.content.strip }
           rescue => e
+            puts "Error extracting variant_ids from XML: #{@xml}. #{e}"
             raise "Error extracting variant_ids from XML: #{@xml}. #{e}"
           end
 
