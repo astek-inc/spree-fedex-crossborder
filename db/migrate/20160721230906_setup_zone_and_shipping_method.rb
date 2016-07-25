@@ -2,14 +2,15 @@ class SetupZoneAndShippingMethod < ActiveRecord::Migration
 
   EXISTING_INTERNATIONAL_ZONES = [
       { name: 'EU_VAT', description: 'Countries that make up the EU VAT zone.', kind: 'country', country_ids: [12, 20, 22, 55, 59, 64, 70, 75, 57, 100, 102, 110, 135, 133, 134, 153, 166, 179, 183, 188, 201, 199, 68, 196, 77] },
-      { name: 'UK', description: 'The United Kingdom', kind: 'country', country_ids: [77] }
+      { name: 'UK', description: 'The United Kingdom', kind: 'country', country_ids: [77] },
+      { name: 'North America', description: 'USA and Canada', kind: 'country', country_ids: [38, 232] }
   ]
-  EXISTING_INTERNATIONAL_SHIPPING_METHOD = { name: 'UPS Worldwide Expedited', admin_name: 'UPS Worldwide Expedited', display_on: '' }
+  EXISTING_INTERNATIONAL_SHIPPING_METHOD = { name: 'UPS Worldwide Expedited', admin_name: 'UPS Worldwide Expedited', display_on: :both }
   EXISTING_SHIPPING_METHOD_CALCULATOR = { type: 'Spree::Calculator::Shipping::Ups::WorldwideExpedited', calculable_type: 'Spree::ShippingMethod' }
 
 
   NON_USA_ZONE = { name: 'Non-USA', description: 'All countries outside the United States', kind: 'country' }
-  FEDEX_CROSSBORDER_SHIPPING_METHOD = { name: 'FedEx CrossBorder', admin_name: 'FedEx CrossBorder', display_on: :back_end }
+  FEDEX_CROSSBORDER_SHIPPING_METHOD = { name: 'FedEx CrossBorder', admin_name: 'FedEx CrossBorder', display_on: :both }
   FEDEX_CROSSBORDER_SHIPPING_METHOD_CALCULATOR = { type: 'Spree::Calculator::Shipping::FlatRate', calculable_type: 'Spree::ShippingMethod' }
 
   def up
@@ -56,6 +57,5 @@ class SetupZoneAndShippingMethod < ActiveRecord::Migration
 
     shipping_method.save!
   end
-
 end
 
