@@ -10,13 +10,12 @@ Spree::Variant.class_eval do
   def push_to_fedex_crossborder
     set_client if client.nil?
     begin
-      response = self.client.call(:connect_product_info, message: fedex_crossborder_variant_message )
-      unless response.body[:connect_product_info_response][:return][:error] == 0
-        raise response.body[:connect_product_info_response][:return][:error_message]
+      response = self.client.call(:connect_product_info, message: fedex_crossborder_variant_message)
+      unless response.body[:connect_product_info_response][:return][:error] == '0'
+        raise 'Error pushing new variant to FedEx CrossBorder: '+response.body[:connect_product_info_response][:return][:error_message].to_s
       end
     rescue => error
-      puts "Error pushing new variant to FedEx CrossBorder: #{error}"
-      # raise "Error pushing new variant to FedEx CrossBorder: #{error}"
+      puts error
     end
   end
 
@@ -24,7 +23,7 @@ Spree::Variant.class_eval do
   def set_client
     self.client = Savon.client(
         wsdl: Rails.configuration.fedex_crossborder_api_url,
-        # strip_namespaces: false,
+        # strip_namespaces: true,
         # log: true,
         # pretty_print_xml: true
     )
