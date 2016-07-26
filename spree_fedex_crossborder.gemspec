@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_fedex_crossborder'
-  s.version     = '0.0.10'
+  s.version     = '0.0.11'
   s.summary     = 'FedEx Crossborder integration'
   s.description = 'FedEx Crossborder integration to handle international shipping.'
   s.required_ruby_version = '>= 2.0.0'
