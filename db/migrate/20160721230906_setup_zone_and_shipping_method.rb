@@ -1,5 +1,6 @@
 class SetupZoneAndShippingMethod < ActiveRecord::Migration
 
+  EXISTING_DOMESTIC_ZONE = { name: 'North America' }
   EXISTING_INTERNATIONAL_ZONES = [
       { name: 'EU_VAT', description: 'Countries that make up the EU VAT zone.', kind: 'country', country_ids: [12, 20, 22, 55, 59, 64, 70, 75, 57, 100, 102, 110, 135, 133, 134, 153, 166, 179, 183, 188, 201, 199, 68, 196, 77] },
       { name: 'UK', description: 'The United Kingdom', kind: 'country', country_ids: [77] },
@@ -9,6 +10,7 @@ class SetupZoneAndShippingMethod < ActiveRecord::Migration
   EXISTING_SHIPPING_METHOD_CALCULATOR = { type: 'Spree::Calculator::Shipping::Ups::WorldwideExpedited', calculable_type: 'Spree::ShippingMethod' }
 
 
+  NEW_DOMESTIC_ZONE = { name: 'USA' }
   NON_USA_ZONE = { name: 'Non-USA', description: 'All countries outside the United States', kind: 'country' }
   FEDEX_CROSSBORDER_SHIPPING_METHOD = { name: 'FedEx CrossBorder', admin_name: 'FedEx CrossBorder' }
   FEDEX_CROSSBORDER_SHIPPING_METHOD_CALCULATOR = { type: 'Spree::Calculator::Shipping::FlatRate', calculable_type: 'Spree::ShippingMethod' }
@@ -31,6 +33,11 @@ class SetupZoneAndShippingMethod < ActiveRecord::Migration
       Spree::Zone.find_by(name: zone[:name]).destroy
     end
     Spree::ShippingMethod.find_by(EXISTING_INTERNATIONAL_SHIPPING_METHOD).destroy
+
+    zone = Spree::Zone.find_by(name: NEW_DOMESTIC_ZONE[:name])
+    Spree::ShippingMethod.where.not(name: FEDEX_CROSSBORDER_SHIPPING_METHOD[:name]).each do |shipping_method|
+      shipping_method.zones << zone
+    end
   end
 
   def down
@@ -56,6 +63,10 @@ class SetupZoneAndShippingMethod < ActiveRecord::Migration
     shipping_method.calculator = Spree::Calculator.create!(EXISTING_SHIPPING_METHOD_CALCULATOR)
 
     shipping_method.save!
+
+    zone = Spree::Zone.find_by(name: EXISTING_DOMESTIC_ZONE[:name])
+    Spree::ShippingMethod.where.not(name: EXISTING_INTERNATIONAL_SHIPPING_METHOD[:name]).each do |shipping_method|
+      shipping_method.zones << zone
+    end
   end
 end
-
