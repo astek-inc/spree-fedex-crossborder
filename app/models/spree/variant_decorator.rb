@@ -49,7 +49,7 @@ Spree::Variant.class_eval do
           :url => 'https://www.designyourwall.com/products/'+self.product.slug,
           :imageUrl => image_url(master_variant.images.first),
           :price => formatted_price(self.price),
-          :countryOfOrigin => 'US',
+          :countryOfOrigin => country_of_origin,
           :hsCode => '',
           :eccn => '',
           :hazFlag => 0,
@@ -95,5 +95,9 @@ Spree::Variant.class_eval do
     else
       price_in_usd
     end
+  end
+
+  def country_of_origin
+    self.product.country.iso.nil? ? 'US' : self.product.country.iso
   end
 end
