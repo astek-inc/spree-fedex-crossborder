@@ -32,6 +32,9 @@ module Spree
 
           Spree::FedexCrossborderOrderConfirmation.create confirmation
 
+          # tracking_number
+
+
           # Products have been cancelled, i.e., removed from the order
           if @status == 'C'
             update_line_items
@@ -100,6 +103,18 @@ module Spree
           rescue => e
             puts "Error extracting order_number from XML: #{@xml}. #{e}"
             raise "Error extracting order_number from XML: #{@xml}. #{e}"
+          end
+        end
+
+        # We are passed a tracking link. Extract the tracking number
+        # so we can store it the same way we do for other shipping methods
+        def tracking_number
+          begin
+            tracking_link = @xml_doc.at_xpath('//trackinglink').content.strip
+            tracking_link.sub(%r{\Ahttps://bongous.com/tracking/}, '')
+          rescue => e
+            puts "Error extracting tracking number from XML: #{@xml}. #{e}"
+            raise "Error extracting tracking number from XML: #{@xml}. #{e}"
           end
         end
 
