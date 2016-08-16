@@ -1,0 +1,15 @@
+<% content_for :page_title do %>
+    <%= Spree.t(:editing) + ' ' + Spree.t(:distribution_center, scope: :fedex_crossborder) %>
+<% end %>
+
+<%= render partial: 'spree/admin/shared/error_messages', locals: { target: @fedex_crossborder_distribution_center } %>
+
+<%= form_for( [:admin, @fedex_crossborder_distribution_center] )do |f| %>
+    <fieldset data-hook="edit_fedex_crossborder_distribution_center">
+      <%= render partial: 'form', locals: { f: f } %>
+    </fieldset>
+
+    <div class="form-actions">
+      <%= render partial: 'spree/admin/shared/edit_resource_links' %>
+    </div>
+<% end %>

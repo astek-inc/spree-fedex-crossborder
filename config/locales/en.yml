@@ -10,3 +10,8 @@ en:
       symbol_position: 'Symbol Position'
       before: 'Before'
       after: 'After'
+      vendor_name: 'FedEx CrossBorder'
+      distribution_center: 'Distribution Center'
+      distribution_centers: 'Distribution Centers'
+      state: 'State'
+      zone: 'Zone'

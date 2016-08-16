@@ -14,6 +14,7 @@ Spree::Core::Engine.routes.draw do
 
   namespace :admin do
     resources :currencies
+    resources :fedex_crossborder_distribution_centers
   end
 
   namespace :api do

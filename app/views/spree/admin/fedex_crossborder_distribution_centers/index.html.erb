@@ -1,0 +1,37 @@
+<% content_for :page_title do %>
+    <%= Spree.t(:vendor_name, scope: :fedex_crossborder) + ' ' + Spree.t(:distribution_centers, scope: :fedex_crossborder) %>
+<% end %>
+
+<% content_for :page_actions do %>
+    <%= button_link_to Spree.t(:new) + ' ' + Spree.t(:distribution_center, scope: :fedex_crossborder), new_object_url, { :class => 'btn-success', :icon => 'add', 'data-update' => 'new_fedex_crossborder_distribution_center', :id => 'new_fedex_crossborder_distribution_center_link' } %>
+<% end %>
+
+<% if @collection.any? %>
+    <table class="table" id="fedex_crossborder_distribution_centers">
+      <thead>
+      <tr data-hook="admin_fedex_crossborder_distribution_center_index_headers">
+        <th class="name"><%= Spree.t(:name, scope: :fedex_crossborder) %></th>
+        <th class="city"><%= Spree.t(:city, scope: :fedex_crossborder) %></th>
+        <th class="zone"><%= Spree.t(:zone, scope: :fedex_crossborder) %></th>
+        <th data-hook="admin_currencies_index_header_actions" class="actions"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @collection.each do |distribution_center| %>
+          <tr id="<%= spree_dom_id distribution_center %>" data-hook="admin_fedex_crossborder_distribution_centers_index_rows" class="<%= cycle('odd', 'even') %>">
+            <td class="name"><%= distribution_center.name %></td>
+            <td class="city"><%= distribution_center.city %>, <%= distribution_center.state.abbr %></td>
+            <td class="zone"><%= distribution_center.zone.name %></td>
+            <td class="actions actions-2 text-right">
+              <%= link_to_edit(distribution_center, :no_text => true) %>
+              <%= link_to_delete(distribution_center, :no_text => true) %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% else %>
+    <div class="alert alert-info no-objects-found">
+      <%= Spree.t(:no_resource_found, resource: Spree.t(:distribution_centers, scope: :fedex_crossborder)) %>.
+    </div>
+<% end %>
