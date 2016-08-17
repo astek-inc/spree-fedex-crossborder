@@ -4,7 +4,7 @@ module Spree
     require 'net/http'
     require 'json'
 
-    def self.get_token(order, items)
+    def self.get_token(order, items, total_domestic_shipping)
       uri = URI.parse(ENV['FEDEX_CROSSBORDER_CHECKOUT_SECURITY_URL'])
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
@@ -14,7 +14,7 @@ module Spree
       request.basic_auth(ENV['FEDEX_CROSSBORDER_USERNAME'], ENV['FEDEX_CROSSBORDER_PASSWORD'])
       form_data = {
         'PARTNER_KEY' => ENV['FEDEX_CROSSBORDER_PARTNER_KEY'],
-        'TOTAL_DOMESTIC_SHIPPING_CHARGE' => 0,
+        'TOTAL_DOMESTIC_SHIPPING_CHARGE' => total_domestic_shipping,
         'CUSTOM_ORDER_1' => order.id,
         'CUSTOM_ORDER_2' => order.number,
         'ORDER_CURRENCY' => 'USD',
@@ -50,6 +50,9 @@ module Spree
         form_data["PRODUCT_SHIPPING_#{i}"] = 0.to_f
         form_data["PRODUCT_CUSTOM_1_#{i}"] = item[:variant].id
       end
+
+      # require 'pry'
+      # Pry::ColorPrinter.pp(form_data)
 
       request.set_form_data(form_data)
       response = http.request(request)

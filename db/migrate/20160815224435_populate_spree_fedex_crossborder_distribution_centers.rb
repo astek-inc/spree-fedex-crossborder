@@ -2,11 +2,12 @@ class PopulateSpreeFedexCrossborderDistributionCenters < ActiveRecord::Migration
   def up
     Spree::FedexCrossborderDistributionCenter.create!({
         name: 'West',
-        address_line_1: '861 E Sandhill Ave',
-        address_line_2: 'MB# 323391',
+        address1: '861 E Sandhill Ave',
+        address2: 'MB# 323391',
         city: 'Carson',
         state: Spree::State.find_by(abbr: 'CA', country: Spree::Country.find_by(iso: 'US')),
-        zip: '90746',
+        zipcode: '90746',
+        country: Spree::Country.find_by(iso: 'US'),
         zone: Spree::Zone.find_by(name: 'USA')
     })
   end

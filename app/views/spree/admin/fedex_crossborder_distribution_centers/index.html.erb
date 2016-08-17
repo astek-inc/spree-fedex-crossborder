@@ -12,6 +12,8 @@
       <tr data-hook="admin_fedex_crossborder_distribution_center_index_headers">
         <th class="name"><%= Spree.t(:name, scope: :fedex_crossborder) %></th>
         <th class="city"><%= Spree.t(:city, scope: :fedex_crossborder) %></th>
+        <th class="state"><%= Spree.t(:state, scope: :fedex_crossborder) %></th>
+        <th class="country"><%= Spree.t(:country, scope: :fedex_crossborder) %></th>
         <th class="zone"><%= Spree.t(:zone, scope: :fedex_crossborder) %></th>
         <th data-hook="admin_currencies_index_header_actions" class="actions"></th>
       </tr>
@@ -20,7 +22,9 @@
       <% @collection.each do |distribution_center| %>
           <tr id="<%= spree_dom_id distribution_center %>" data-hook="admin_fedex_crossborder_distribution_centers_index_rows" class="<%= cycle('odd', 'even') %>">
             <td class="name"><%= distribution_center.name %></td>
-            <td class="city"><%= distribution_center.city %>, <%= distribution_center.state.abbr %></td>
+            <td class="city"><%= distribution_center.city %></td>
+            <td><%= distribution_center.state.abbr %></td>
+            <td><%= distribution_center.country.name %></td>
             <td class="zone"><%= distribution_center.zone.name %></td>
             <td class="actions actions-2 text-right">
               <%= link_to_edit(distribution_center, :no_text => true) %>

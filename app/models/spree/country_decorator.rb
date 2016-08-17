@@ -1,6 +1,7 @@
 module Spree
   Country.class_eval do
 
+    has_many :fedex_crossborder_distribution_centers
     belongs_to :currency
 
     # Fedex does not provide exchange rates for all currencies.
