@@ -45,7 +45,7 @@ module Spree
       items.each.with_index(1) do |item, i|
         form_data["PRODUCT_ID_#{i}"] = item[:variant].sku
         form_data["PRODUCT_NAME_#{i}"] = item[:variant].product.name
-        form_data["PRODUCT_PRICE_#{i}"] = item[:display_amount]
+        form_data["PRODUCT_PRICE_#{i}"] = item[:product_price]
         form_data["PRODUCT_Q_#{i}"] = item[:quantity]
         form_data["PRODUCT_SHIPPING_#{i}"] = 0.to_f
         form_data["PRODUCT_CUSTOM_1_#{i}"] = item[:variant].id
