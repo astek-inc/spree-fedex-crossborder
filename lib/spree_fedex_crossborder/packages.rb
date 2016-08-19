@@ -2,12 +2,12 @@ module SpreeFedexCrossborder
   class Packages
 
     def self.total_domestic_shipping packages
-
       total_domestic_shipping = 0
       packages.each do |package|
         total_domestic_shipping += domestic_shipping_rate package
       end
-      total_domestic_shipping
+
+      total_domestic_shipping + SpreeFedexCrossborder.configuration.surcharge_amount
     end
 
     # Use the ActiveShipping calculator to get the UPS Ground shipping rate
