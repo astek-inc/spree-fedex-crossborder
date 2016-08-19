@@ -19,15 +19,16 @@ module SpreeFedexCrossborder
     end
 
     def self.fedex_address
-      dc = Spree::FedexCrossborderDistributionCenter.find_by(zone: Spree::Zone.find_by(name: 'USA'))
+      distribution_center = Spree::FedexCrossborderDistributionCenter.find_by(zone: Spree::Zone.find_by(name: 'USA'))
+
       Spree::Address.new({
-                             address1: dc.address1,
-                             address2: dc.address2,
-                             city: dc.city,
-                             state: dc.state,
-                             zipcode: dc.zipcode,
-                             country: dc.country
-                         })
+        address1: distribution_center.address1,
+        address2: distribution_center.address2,
+        city: distribution_center.city,
+        state: distribution_center.state,
+        zipcode: distribution_center.zipcode,
+        country: distribution_center.country
+      })
     end
 
   end
