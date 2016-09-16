@@ -37,6 +37,12 @@ module Spree
             update_line_items
           end
 
+          # Order has been "vended", i.e., payment has been received.
+          # Update the order status in our system to show that it is complete
+          if @status == 'V'
+            update_order_status_to_complete
+          end
+
           respond_to do |format|
             format.text { render text: '{SUCCESS}' }
           end
@@ -118,6 +124,15 @@ module Spree
               order.line_items.delete(line_item.id)
             end
           end
+        end
+
+        def update_order_status_to_complete
+          Spree::Order.find(order_id).update_attributes({
+              :state => 'complete',
+              :payment_state => 'paid',
+              :completed_at => Time.now,
+              :shipment_state => 'ready'
+          })
         end
 
       end
