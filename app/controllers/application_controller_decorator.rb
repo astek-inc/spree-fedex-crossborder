@@ -1,6 +1,6 @@
 ApplicationController.class_eval do
 
-  before_action :set_location_cookies
+  # before_action :set_location_cookies
 
   def set_location_cookies
     if cookies.permanent[:country].blank?
